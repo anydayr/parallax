@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+/*sections*/
+@import url('./house-section.css');
+@import url('./grass-section.css');
+@import url('./trees-section.css');
+@import url('./wood-section.css');
+@import url('./bg-effects.css');
+
+:root {
+  --font-family: 'Open Sans', sans-serif;
+  --main-border-color: rgb(155, 119, 102);
+  --text-color: white;
+  --title-font-size: 7rem;
+  --paragraph-font-size: 1.5rem;
+  --padding: 2rem;
+  --opacity: 0.9;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 16px; /* tamaño base */
+}
+
+.main-container {
+  height: calc(100vh - 1rem);
+  width: calc(100vw - 1rem);
+  overflow: hidden;
+  position: relative;
+  border: solid 0.5rem var(--main-border-color);
+}
+
+section {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 2s ease;
+  position: relative;
+}
+
+section img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.zoom {
+  position: relative;
+}
+
+.container-text {
+  position: absolute;
+  padding: var(--padding);
+}
+
+.title {
+  font-size: var(--title-font-size);
+  font-weight: bold;
+  color: var(--text-color);
+  left: 7px;
+  opacity: var(--opacity);
+  top: -23px;
+}
+
+.paragraph {
+  font-size: var(--paragraph-font-size);
+  color: var(--text-color);
+  left: 7px;
+  opacity: var(--opacity);
+  top: -23px;
+  padding: var(--padding);
+}
+
+.absolute {
+  position: absolute;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 5rem;
+  }
+  .paragraph {
+    font-size: 1rem;
+  }
+}
