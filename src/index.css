@@ -9,7 +9,6 @@
 
 :root {
   --font-family: 'Open Sans', sans-serif;
-  --main-border-color: rgb(155, 119, 102);
   --text-color: white;
   --title-font-size: 7rem;
   --paragraph-font-size: 1.5rem;
@@ -24,11 +23,10 @@ body {
 }
 
 .main-container {
-  height: calc(100vh - 1rem);
-  width: calc(100vw - 1rem);
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
   position: relative;
-  border: solid 0.5rem var(--main-border-color);
 }
 
 section {

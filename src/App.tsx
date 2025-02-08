@@ -113,7 +113,6 @@ function App() {
 
   return (
     <div className="main-container">
-      <>{renderSection()} </>
       {currentSection !== 'house' && (
         <button
           className="back-to-home glass"
@@ -125,6 +124,7 @@ function App() {
           Back to home
         </button>
       )}
+      <>{renderSection()} </>
     </div>
   )
 }
