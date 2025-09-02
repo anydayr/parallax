@@ -1,16 +1,30 @@
 .house {
   position: absolute;
 }
+.button {
+  position: absolute;
+  z-index: 25;
+}
+.play {
+  padding: 1rem;
+  color: rgb(33, 17, 5);
+  background-color: transparent;
+  border: none;
+  border-radius: 16px;
+}
+.play:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
 
 .back-to-home {
-  margin-top: 1.5rem;
   margin-left: 2rem;
+  margin-top: 1.5rem;
+  position: absolute;
+  z-index: 25;
   border-radius: 16px;
   border: solid 2px rgba(255, 255, 255, 0.5);
   padding: 1rem;
   color: white;
-  position: absolute;
-  z-index: 25;
   font-weight: 600;
   transition: background-color 0.3s ease;
 }
@@ -30,4 +44,15 @@
 .house.zoom {
   transform: scale(4);
   transition: transform 4s ease;
+}
+
+.audio-title {
+  font-size: 12px;
+  color: rgb(33, 17, 5);
+  font-weight: 600;
+}
+.audio-author {
+  font-size: 10px;
+  color: rgb(33, 17, 5);
+  font-weight: 400;
 }

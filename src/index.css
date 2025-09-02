@@ -39,7 +39,7 @@ section {
   position: relative;
 }
 
-section img {
+.bg-section {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -83,4 +83,33 @@ section img {
   .paragraph {
     font-size: 1rem;
   }
+}
+/* Estilo para la barra de progreso */
+input[type='range'] {
+  -webkit-appearance: none; /* Elimina el estilo predeterminado en WebKit */
+  width: 100%; /* Ancho completo */
+  height: 8px; /* Altura de la barra */
+  background: #ddd; /* Color de fondo */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo para el "thumb" de la barra de progreso */
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Elimina el estilo predeterminado en WebKit */
+  appearance: none; /* Elimina el estilo predeterminado en otros navegadores */
+  width: 16px; /* Ancho del "thumb" */
+  height: 16px; /* Altura del "thumb" */
+  border-radius: 50%; /* Hacerlo redondo */
+  background: #2a1401; /* Color del "thumb" */
+  cursor: pointer; /* Cambia el cursor al pasar */
+  border: solid 1px #ddd;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgb(33, 17, 5);
+  cursor: pointer;
+  border: solid 1px #ddd;
 }
