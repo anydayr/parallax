@@ -9,21 +9,22 @@ import door from './assets/audio/door.mp3'
 import Song from './assets/images/playlist.png'
 import { Canvas } from '@react-three/fiber'
 import HouseExplore from './HouseExplorer'
-import { CatModel } from './CatModel'
 import CatExplore from './CatExplorer'
+
+type SectionType = 'house' | 'model' | 'grass' | 'trees' | 'wood'
 function App() {
-  const [squarePosition, setSquarePosition] = useState({ x: 0, y: 0 })
-  const [currentSection, setCurrentSection] = useState('house')
-  const [zoom, setZoom] = useState(false)
-  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 })
-  const [progress, setProgress] = useState(0)
-  const audioRef = useRef(null)
-  const doorRef = useRef(null)
+  const [squarePosition, setSquarePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+  const [currentSection, setCurrentSection] = useState<SectionType>('house')
+  const [zoom, setZoom] = useState<boolean>(false)
+  const [zoomPosition, setZoomPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+  const [progress, setProgress] = useState<number>(0)
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const doorRef = useRef<HTMLAudioElement>(null)
 
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
-  const handleDragStart = (e) => {
-    const rect = e.target.getBoundingClientRect()
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    const rect = (e.target as HTMLElement).getBoundingClientRect()
     e.dataTransfer.setData(
       'text/plain',
       JSON.stringify({
@@ -33,10 +34,10 @@ function App() {
     )
   }
 
-  const handleDrop = (e) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     const data = JSON.parse(e.dataTransfer.getData('text/plain'))
-    const containerRect = e.target.getBoundingClientRect()
+    const containerRect = (e.target as HTMLElement).getBoundingClientRect()
     const x = e.clientX - containerRect.left - data.offsetX
     const y = e.clientY - containerRect.top - data.offsetY
 
@@ -47,8 +48,10 @@ function App() {
   }
 
   const playSound = () => {
-    audioRef.current.volume = 0.3
-    audioRef.current.play()
+    if (audioRef.current) {
+      audioRef.current.volume = 0.3
+      audioRef.current.play()
+    }
   }
   const handlePlay = () => {
     setIsPlaying(true)
@@ -57,7 +60,9 @@ function App() {
 
   const handlePause = () => {
     setIsPlaying(false)
-    audioRef.current.pause()
+    if (audioRef.current) {
+      audioRef.current.pause()
+    }
   }
 
   const handleNext = () => {
@@ -68,30 +73,36 @@ function App() {
     // Lógica para reproducir la canción anterior
   }
 
-  const handleProgressChange = (event) => {
-    const value = event.target.value
+  const handleProgressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(event.target.value)
     setProgress(value)
-    audioRef.current.currentTime = (value / 100) * audioRef.current.duration
+    if (audioRef.current) {
+      audioRef.current.currentTime = (value / 100) * audioRef.current.duration
+    }
   }
 
   const updateProgress = () => {
-    const currentTime = audioRef.current.currentTime
-    const duration = audioRef.current.duration
-    if (duration > 0) {
-      setProgress((currentTime / duration) * 100)
+    if (audioRef.current) {
+      const currentTime = audioRef.current.currentTime
+      const duration = audioRef.current.duration
+      if (duration > 0) {
+        setProgress((currentTime / duration) * 100)
+      }
     }
   }
 
   useEffect(() => {
     const audio = audioRef.current
-    audio.addEventListener('timeupdate', updateProgress)
-    return () => {
-      audio.removeEventListener('timeupdate', updateProgress)
+    if (audio) {
+      audio.addEventListener('timeupdate', updateProgress)
+      return () => {
+        audio.removeEventListener('timeupdate', updateProgress)
+      }
     }
   }, [])
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     handlePause()
-    const rect = event.target.getBoundingClientRect()
+    const rect = (event.target as HTMLElement).getBoundingClientRect()
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
     console.log({ x, y })
@@ -99,7 +110,7 @@ function App() {
 
     /*   setZoom(true) */
 
-    const changeSection = (section) => {
+    const changeSection = (section: SectionType) => {
       if (section !== 'model') {
         setZoom(true)
       }
@@ -115,7 +126,9 @@ function App() {
       changeSection('trees')
     } else if (x >= 300 && x <= rect.width && y >= 314) {
       changeSection('model')
-      doorRef.current.play()
+      if (doorRef.current) {
+        doorRef.current.play()
+      }
     } else if (x < 299 && y >= 314) {
       changeSection('wood')
     } else if (x >= 191 && x <= 1005 && y >= 41 && y <= 709) {
@@ -138,6 +151,7 @@ function App() {
           >
             <div className="container-text">
               <h1 className="title">WELCOME</h1>
+            
             </div>
             <img src={HouseImage} alt="House" className="bg-section" />
           </section>

@@ -1,5 +1,4 @@
-import { Lightformer, OrbitControls } from '@react-three/drei'
-import { CabinModel } from './CabinModel'
+import {  OrbitControls } from '@react-three/drei'
 import { CatModel } from './CatModel'
 
 export default function CatExplore() {

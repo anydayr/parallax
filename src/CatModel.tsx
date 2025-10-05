@@ -1,8 +1,10 @@
-import React from 'react'
 import { useGLTF } from '@react-three/drei'
+import { GroupProps } from '@react-three/fiber'
 
-export function CatModel(props) {
-  const { nodes, materials } = useGLTF('./models/cat.glb')
+interface CatModelProps extends GroupProps {}
+
+export function CatModel(props: CatModelProps) {
+  const { nodes, materials } = useGLTF('./models/cat.glb') as any
   return (
     <group {...props} dispose={null}>
       <mesh

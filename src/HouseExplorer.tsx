@@ -1,4 +1,4 @@
-import { Lightformer, OrbitControls } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import { CabinModel } from './CabinModel'
 
 export default function HouseExplore() {

@@ -1,9 +1,12 @@
-import React from 'react'
+
 import { useGLTF } from '@react-three/drei'
 import { CatModel } from './CatModel'
+import { GroupProps } from '@react-three/fiber'
 
-export function CabinModel(props) {
-  const { nodes, materials } = useGLTF('./models/cabin.glb')
+interface CabinModelProps extends GroupProps {}
+
+export function CabinModel(props: CabinModelProps) {
+  const { nodes, materials } = useGLTF('./models/cabin.glb') as any
 
   return (
     <group {...props} position={[25, -25, 25]} dispose={null}>
